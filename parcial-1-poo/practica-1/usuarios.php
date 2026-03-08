@@ -25,9 +25,9 @@
          */
         private $correo;
 
-        public function __construct($nombre, $correo){
-            $this->nombre = $nombre;
-            $this->correo = $correo;
+        public function __construct(){
+            $this->nombre = "";
+            $this->correo = "";
         }
         public function __destruct(){
             echo "El usuario {$this->nombre} ha sido destruido.";
