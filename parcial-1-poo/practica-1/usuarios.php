@@ -1,15 +1,36 @@
 <?php
     namespace parcial1\practica1;
 
+
+    /**
+     * Clase Usuario que representa a un usuario del sistema
+     * 
+     * @package parcial1\practica1
+     * @author Hector Manuel Padilla Osuna
+     * @version 1.0.0
+     */
     class Usuario{
+        
+        /**
+         * El nombre del usuario
+         * 
+         * @var string $nombre
+         */
         private $nombre;
+        
+        /**
+         * El correo del usuario
+         * 
+         * @var string $correo
+         */
         private $correo;
 
-        public function __construct(){
-
+        public function __construct($nombre, $correo){
+            $this->nombre = $nombre;
+            $this->correo = $correo;
         }
         public function __destruct(){
-                
+            echo "El usuario {$this->nombre} ha sido destruido.";
         }
 
         public function getNombre(){
