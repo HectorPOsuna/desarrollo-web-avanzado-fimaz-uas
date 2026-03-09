@@ -7,22 +7,6 @@
      */
     class Admin extends Usuario{
         
-        /**
-         * El rol del administrador
-         * 
-         * @var string $rol
-         */
-        private $rol;
-
-        public function __construct()
-        {
-            parent::__construct();
-            $this->rol = "";
-        }
-
-        public function setRol($rol){
-            $this->rol = $rol;
-        }
         public function getRol(){
             return "administrador";
         }
