@@ -19,10 +19,6 @@
             parent::__construct();
             $this->rol = "administrador";
         }
-        public function __destruct()
-        {
-            return parent::__destruct();
-        }
 
         public function setRol($rol){
             $this->rol = $rol;
