@@ -2,7 +2,6 @@
     /**
      * Clase Usuario que representa a un usuario del sistema
      * 
-     * @package Parcial1\Practica1
      * @author Hector Manuel Padilla Osuna
      * @version 1.0.0
      */
