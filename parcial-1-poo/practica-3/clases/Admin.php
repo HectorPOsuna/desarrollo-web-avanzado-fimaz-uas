@@ -17,14 +17,14 @@
         public function __construct()
         {
             parent::__construct();
-            $this->rol = "";
+            $this->rol = "administrador";
         }
 
         public function setRol($rol){
             $this->rol = $rol;
         }
         public function getRol(){
-            return $this->rol = "administrador";
+            return $this->rol;
         }
     }
 ?>
