@@ -3,7 +3,7 @@
      * Clase Usuario que representa a un usuario del sistema
      * 
      * @author Hector Manuel Padilla Osuna
-     * @version 1.0.0
+     * @version 1.2.1
      */
     class Usuario{
         

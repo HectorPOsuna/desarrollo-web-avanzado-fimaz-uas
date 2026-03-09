@@ -4,7 +4,7 @@
      * 
      * @package Parcial1\Practica1
      * @author Hector Manuel Padilla Osuna
-     * @version 1.0.0
+     * @version 1.1.0
      */
     class Usuario{
         
