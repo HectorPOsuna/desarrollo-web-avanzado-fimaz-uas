@@ -7,8 +7,6 @@
         }
     });
 
-    use Parcial1\Practica1\Usuario;
-
     $usuario = new Usuario();
 
     $usuario->setNombre("Hector Manuel Padilla Osuna");
