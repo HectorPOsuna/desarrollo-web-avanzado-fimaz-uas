@@ -16,8 +16,8 @@
         
         public function __construct()
         {
-            return parent::__construct();
-            $this->matricula = "";
+            parent::__construct();
+            $this->matricula = "948524-36";
         }
 
         public function setMatricula($matricula){
@@ -34,8 +34,7 @@
          */
         public function getRol()
         {
-            $this->setRol("alumno");
-            return parent::getRol();
+            return "alumno";
         }
     }
 ?>
