@@ -37,8 +37,21 @@
         public function getCorreo(){
             return $this->correo;
         }
+
+        /**
+         * Establece el correo del usuario, validando que sea un formato de correo electrónico válido.
+         * 
+         * @param string $correo El correo electrónico a establecer para el usuario.
+         */
         public function setCorreo($correo){
-            $this->correo = $correo;
+            
+            $correo = trim($correo);
+            
+            if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+                throw new InvalidArgumentException("El correo electrónico no es válido.");
+            } else {
+                $this->correo = $correo;
+            }
         }
     }
 ?>
