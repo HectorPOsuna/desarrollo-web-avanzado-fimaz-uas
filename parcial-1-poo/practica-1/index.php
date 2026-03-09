@@ -13,4 +13,7 @@
 
     $usuario->setNombre("Hector Manuel Padilla Osuna");
     $usuario->setCorreo("hpadilla@uas.edu.mx");
+
+    echo "Nombre: " . $usuario->getNombre() . "<br>";
+    echo "Correo: " . $usuario->getCorreo() . "<br>";
 ?>
