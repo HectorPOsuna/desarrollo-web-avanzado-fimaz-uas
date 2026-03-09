@@ -17,7 +17,7 @@
         public function __construct()
         {
             parent::__construct();
-            $this->rol = "admininstrador";
+            $this->rol = "administrador";
         }
         public function __destruct()
         {
