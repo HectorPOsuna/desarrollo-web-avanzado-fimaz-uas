@@ -21,6 +21,12 @@
          */
         private $correo;
 
+        /**
+         * Constructor de la clase Usuario, que inicializa el nombre y correo del usuario.
+         * 
+         * @param string $nombre El nombre del usuario, no puede estar vacío.
+         * @param string $correo El correo electrónico del usuario, debe tener un formato válido.
+         */
         public function __construct($nombre, $correo){
             if(empty($nombre)){
                 throw new Exception("El nombre del usuario no puede estar vacío.");
