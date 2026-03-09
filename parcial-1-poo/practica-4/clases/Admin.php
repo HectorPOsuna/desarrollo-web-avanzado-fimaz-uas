@@ -6,6 +6,10 @@
      * @version 1.0.0
      */
     class Admin extends Usuario{
+
+        public function __construct($nombre, $correo){
+        parent::__construct($nombre, $correo);
+        }
         
         public function getRol(){
             return "administrador";
