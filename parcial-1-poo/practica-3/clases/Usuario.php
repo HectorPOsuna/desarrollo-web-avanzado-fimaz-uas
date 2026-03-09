@@ -48,7 +48,7 @@
             $correo = trim($correo);
             
             if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-                throw new InvalidArgumentException("El correo electrónico no es válido.");
+                throw new Exception("El correo electrónico no tiene un formato válido.");
             } else {
                 $this->correo = $correo;
             }
