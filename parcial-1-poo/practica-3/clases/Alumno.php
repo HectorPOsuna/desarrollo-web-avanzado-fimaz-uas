@@ -14,5 +14,11 @@
         public function getMatricula(){
             return $this->matricula;
         }
+
+        public function getRol()
+        {
+            $this->setRol("alumno");
+            return parent::getRol();
+        }
     }
 ?>
