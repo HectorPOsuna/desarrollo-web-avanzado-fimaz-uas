@@ -5,3 +5,9 @@ En este caso al tener la clase usuario con sus atributos o propiedades en privad
 
 ### Diferencias
 En este caso primordialmente el Usuario tiene las propiedades principales como correo o nombre mientras que Admin solamente contiene la propiedad de rol (por defecto administrador) y al heredar de Usuarios este puede contener las propiedades similares a un Usuario comun pero con un rol administrativo sin redundancia de codigo que ya se tiene en clase Usuario.
+
+### Evidencia
+En este caso anteriormente solamente mostraba los datos de nombre y correo pero ahora muestra los siguientes datos:
+Nombre: Hector Manuel Padilla Osuna
+Correo: hpadilla@uas.edu.mx
+Rol: administrador
