@@ -14,6 +14,10 @@
          */
         private $empresa;
 
+        public function __construct(){
+            $this->empresa = "Empresa XYZ";
+        }
+
         
     }
 ?>
