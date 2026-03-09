@@ -26,9 +26,7 @@
             $this->nombre = "";
             $this->correo = "";
         }
-        public function __destruct(){
-            echo "El usuario {$this->nombre} ha sido destruido.";
-        }
+        public function __destruct(){}
 
         public function getNombre(){
             return $this->nombre;
