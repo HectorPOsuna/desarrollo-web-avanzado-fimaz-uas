@@ -8,12 +8,19 @@
         }
     });
 
-    $adm = new Admin();
+    try{
+        $admin = new Admin();
+        $alumno = new Alumno();
 
-    $adm->setNombre("Hector Manuel Padilla Osuna");
-    $adm->setCorreo("hpadilla@uas.edu.mx");
+        $admin->setNombre("Hector Manuel Padilla Osuna");
+        $admin->setCorreo("hpadilla@uas.edu.mx");
 
-    echo "Nombre: " . $adm->getNombre() . "<br>";
-    echo "Correo: " . $adm->getCorreo() . "<br>";
-    echo "Rol: " . $adm->getRol() . "<br>";
+        echo "Nombre: " . $admin->getNombre() . "<br>";
+        echo "Correo: " . $admin->getCorreo() . "<br>";
+        echo "Rol: " . $alumno->getRol() . "<br>";
+        echo "Matrícula: " . $alumno->getMatricula() . "<br>";
+    }
+    catch(Exception $e){
+        echo "Error: " . $e->getMessage();
+    }
 ?>
