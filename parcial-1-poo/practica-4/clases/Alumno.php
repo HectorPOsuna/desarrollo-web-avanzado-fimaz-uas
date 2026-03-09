@@ -19,12 +19,10 @@
             $this->matricula = "948524-36";
         }
 
-        public function setMatricula($matricula){
-            $this->matricula = $matricula;
-        }
         public function getMatricula(){
             return $this->matricula;
         }
+        
         public function getRol()
         {
             return "alumno";
