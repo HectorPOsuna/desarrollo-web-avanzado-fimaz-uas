@@ -12,8 +12,5 @@
     $usuario = new Usuario();
 
     $usuario->setNombre("Hector Manuel Padilla Osuna");
-    $usuario->setCorreo("gamerspy2003@gmail.com");
-
-    echo "Nombre: " . $usuario->getNombre() . "<br>";
-    echo "Correo: " . $usuario->getCorreo() . "<br>";
+    $usuario->setCorreo("hpadilla@uas.edu.mx");
 ?>
