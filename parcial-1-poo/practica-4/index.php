@@ -1,4 +1,6 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 
     spl_autoload_register(function ($clase){
         $ruta = __DIR__ . "/clases/" . str_replace("\\", "/", $clase) . ".php";
@@ -8,58 +10,35 @@
         }
     });
 
-    $admin = new Admin();
-    $alumno = new Alumno();
-    $invitado = new Invitado();
+    $usuarios = [];
 
-    try{
-        $admin->setNombre("Hector Manuel Padilla Osuna");
-        $admin->setCorreo("hpadilla@uas.edu.mx");
+    try {
 
-        echo "Nombre: " . $admin->getNombre() . "<br>";
-        echo "Correo: " . $admin->getCorreo() . "<br>";
-        echo "Rol: " . $alumno->getRol() . "<br>";
-        echo "Matrícula: " . $alumno->getMatricula() . "<br>";
-    }
-    catch(Exception $e){
-        echo "Error: " . $e->getMessage();
-    }
+    $usuarios[] = new Admin(
+        "Roy Mustang",
+        "rmustang@uas.edu.mx"
+    );
 
-    try{
-        $admin->setNombre("Leroy Jenkins");
-        $admin->setCorreo("ljenkins@uas.edu");
-        $alumno->setMatricula("123456-78");
+    $usuarios[] = new Alumno(
+        "Hector Padilla",
+        "hpadilla@uas.edu.mx",
+        "948524-36"
+    );
 
-        echo "Nombre: " . $admin->getNombre() . "<br>";
-        echo "Correo: " . $admin->getCorreo() . "<br>";
-        echo "Rol: " . $alumno->getRol() . "<br>";
-        echo "Matrícula: " . $alumno->getMatricula() . "<br>";
-    }
-    catch(Exception $e){
-        echo "Error: " . $e->getMessage();
-    }
+    $usuarios[] = new Invitado(
+        "Leroy Jenkins",
+        "ljenkins@empresxyz.com",
+        "Empresa XYZ"
+    );
 
-    try{
-        $admin->setNombre("Roy Mustang");
-        $admin->setCorreo("rmustang@uas");
+    // Usuario inválido
+    $usuarios[] = new Admin(
+        "Jacobo Mitchell",
+        "jcob@uas"
+    );
 
-        echo "Nombre: " . $admin->getNombre() . "<br>";
-        echo "Correo: " . $admin->getCorreo() . "<br>";
-        echo "Rol: " . $admin->getRol() . "<br>";
-    }
-    catch(Exception $e){
-        echo "Error: " . $e->getMessage();
-    }
-
-    try{
-        $admin->setNombre("Roy Mustang");
-        $admin->setCorreo("rmustang@uas");
-
-        echo "Nombre: " . $admin->getNombre() . "<br>";
-        echo "Correo: " . $admin->getCorreo() . "<br>";
-        echo "Rol: " . $admin->getRol() . "<br>";
-    }
-    catch(Exception $e){
-        echo "Error: " . $e->getMessage();
-    }
+}
+catch(Exception $e){
+    echo "<p>Error controlado: " . $e->getMessage() . "</p>";
+}
 ?>
