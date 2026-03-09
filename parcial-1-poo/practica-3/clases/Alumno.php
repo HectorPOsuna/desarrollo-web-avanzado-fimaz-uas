@@ -1,5 +1,5 @@
 <?php
-    class Alumno extends Usuario{
+    class Alumno extends Admin{
         private $matricula;
         
     }
