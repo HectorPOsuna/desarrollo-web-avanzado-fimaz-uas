@@ -1,4 +1,5 @@
 <?php
+
     class Admin extends Usuario{
         private $rol;
 
@@ -12,6 +13,11 @@
             return parent::__destruct();
         }
 
-        
+        public function setRol($rol){
+            $this->rol = $rol;
+        }
+        public function getRol(){
+            return $this->rol;
+        }
     }
 ?>
