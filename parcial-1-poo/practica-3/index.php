@@ -8,10 +8,10 @@
         }
     });
 
-    try{
-        $admin = new Admin();
-        $alumno = new Alumno();
+    $admin = new Admin();
+    $alumno = new Alumno();
 
+    try{
         $admin->setNombre("Hector Manuel Padilla Osuna");
         $admin->setCorreo("hpadilla@uas.edu.mx");
 
@@ -19,6 +19,32 @@
         echo "Correo: " . $admin->getCorreo() . "<br>";
         echo "Rol: " . $alumno->getRol() . "<br>";
         echo "Matrícula: " . $alumno->getMatricula() . "<br>";
+    }
+    catch(Exception $e){
+        echo "Error: " . $e->getMessage();
+    }
+
+    try{
+        $admin->setNombre("Leroy Jenkins");
+        $admin->setCorreo("ljenkins@uas.edu");
+        $alumno->setMatricula("123456-78");
+
+        echo "Nombre: " . $admin->getNombre() . "<br>";
+        echo "Correo: " . $admin->getCorreo() . "<br>";
+        echo "Rol: " . $alumno->getRol() . "<br>";
+        echo "Matrícula: " . $alumno->getMatricula() . "<br>";
+    }
+    catch(Exception $e){
+        echo "Error: " . $e->getMessage();
+    }
+
+    try{
+        $admin->setNombre("Roy Mustang");
+        $admin->setCorreo("rmustang@uas");
+
+        echo "Nombre: " . $admin->getNombre() . "<br>";
+        echo "Correo: " . $admin->getCorreo() . "<br>";
+        echo "Rol: " . $admin->getRol() . "<br>";
     }
     catch(Exception $e){
         echo "Error: " . $e->getMessage();
