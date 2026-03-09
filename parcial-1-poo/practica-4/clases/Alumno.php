@@ -14,9 +14,9 @@
          */
         private $matricula;
         
-        public function __construct()
-        {
-            $this->matricula = "948524-36";
+        public function __construct($nombre, $correo, $matricula){
+        parent::__construct($nombre, $correo);
+        $this->matricula = $matricula;
         }
 
         public function getMatricula(){
