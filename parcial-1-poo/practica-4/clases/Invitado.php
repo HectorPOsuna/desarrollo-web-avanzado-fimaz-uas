@@ -14,10 +14,14 @@
          */
         private $empresa;
 
-        public function __construct(){
-            $this->empresa = "Empresa XYZ";
+        public function __construct($nombre, $correo, $empresa){
+        parent::__construct($nombre, $correo);
+        $this->empresa = $empresa;
         }
         
+        public function setEmpresa($empresa){
+            $this->empresa = $empresa;
+        }
         public function getEmpresa(){
             return $this->empresa;
         }
