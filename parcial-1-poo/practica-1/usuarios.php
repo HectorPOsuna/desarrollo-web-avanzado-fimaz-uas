@@ -1,11 +1,11 @@
 <?php
-    namespace parcial1\practica1;
+    namespace Parcial1\Practica1;
 
 
     /**
      * Clase Usuario que representa a un usuario del sistema
      * 
-     * @package parcial1\practica1
+     * @package Parcial1\Practica1
      * @author Hector Manuel Padilla Osuna
      * @version 1.0.0
      */
