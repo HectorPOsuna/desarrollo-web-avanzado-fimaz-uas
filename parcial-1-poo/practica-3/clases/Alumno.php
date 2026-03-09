@@ -26,12 +26,6 @@
         public function getMatricula(){
             return $this->matricula;
         }
-
-        /**
-         * Sobrescribe el método getRol de la clase Admin para devolver "alumno" en lugar de "administrador".
-         * 
-         * @return string El rol del alumno, que es "alumno".
-         */
         public function getRol()
         {
             return "alumno";
