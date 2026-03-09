@@ -1,7 +1,4 @@
 <?php
-    namespace Parcial1\Practica1;
-
-
     /**
      * Clase Usuario que representa a un usuario del sistema
      * 
