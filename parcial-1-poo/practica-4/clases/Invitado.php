@@ -17,7 +17,14 @@
         public function __construct(){
             $this->empresa = "Empresa XYZ";
         }
+        
+        public function getEmpresa(){
+            return $this->empresa;
+        }
 
+        public function getRol(){
+            return "invitado";
+        }
         
     }
 ?>
