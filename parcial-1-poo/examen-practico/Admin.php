@@ -7,6 +7,14 @@
      */
     class Admin extends Usuario{
 
-        
+        /**
+         * Metodo que devuelve el rol de administrador
+         * 
+         * @return string Devuelve la cadena de caracteres de administrador como rol
+         */
+        public function getRol(){
+            return "administrador";
+        }
+
     }
 ?>
