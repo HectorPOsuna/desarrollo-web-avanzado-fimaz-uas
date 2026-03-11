@@ -3,21 +3,21 @@
     require  'Admin.php';
     require  'Alumno.php';
 
-    $usuarios = [];
+    $usuario = [];
 
     try {
-        $usuarios[] = new Alumno(
+        $usuario[] = new Alumno(
             "Roy Mustang",
             "roymustan@gmail.com",
             "150014-18"
         );
 
-        $usuarios[] = new Admin(
+        $usuario[] = new Admin(
             "Jacob Frie",
             "Jacobo@uas.edu.mx"
         );
 
-        $usuarios[] = new Usuario(
+        $usuario[] = new Usuario(
             "Hector Osuna",
             "hpadilla_@dscaa"
         );
