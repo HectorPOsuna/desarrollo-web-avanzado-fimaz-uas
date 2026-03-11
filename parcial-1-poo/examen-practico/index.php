@@ -47,6 +47,7 @@ foreach($usuarios as $u)
         echo "<td>".$u->getCorreo() ."</td>";
         echo "<td>".$rol()."</td>";
         echo "<td>".$matricula()."</td>";
+        echo "<tr>";
     }
 ?>
 </table>
