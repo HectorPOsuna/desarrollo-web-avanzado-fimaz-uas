@@ -23,4 +23,7 @@
         );
 
     }
+    catch(Exception $e){
+        echo "<p> Error: " . $e->getMessage() . "<p>";
+    }
 ?>
