@@ -26,4 +26,18 @@
     catch(Exception $e){
         echo "<p> Error: " . $e->getMessage() . "<p>";
     }
+    
+    ?>
+    <table border="1">
+    <tr>
+    <th>Nombre</th>
+    <th>Correo</th>
+    <th>Rol</th>
+    <th>Matricula</th>
+    </tr>
+
+
+    
+    ?>
+
 ?>
