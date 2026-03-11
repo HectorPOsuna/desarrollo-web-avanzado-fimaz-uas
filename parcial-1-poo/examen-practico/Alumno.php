@@ -17,7 +17,11 @@
             parent::__construct($nombre,$correo);
             $this->matricula = $matricula;
         }
-        
+
+        public function getRol(){
+            return "alumno";
+        }
+
         public function getMatricula(){
             return $this->matricula;
         }
