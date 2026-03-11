@@ -6,6 +6,8 @@
             $this->matricula = $matricula;
         }
 
-        
+        public function getMatricula(){
+            return $this->matricula;
+        }
     }
 ?>
