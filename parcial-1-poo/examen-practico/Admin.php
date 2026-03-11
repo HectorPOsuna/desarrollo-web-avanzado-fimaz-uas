@@ -7,6 +7,10 @@
      */
     class Admin extends Usuario{
 
+        public function __construct($nombre, $correo){
+            parent::__construct($nombre,$correo);
+        }
+
         /**
          * Metodo que devuelve el rol de administrador
          * 
