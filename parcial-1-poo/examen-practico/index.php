@@ -40,11 +40,12 @@
 foreach($usuario as $u)
     {
         $matricula = method_exists($u, 'getMatricula') ? $u->getMatricula() : "—";
+        $rol = method_exists($u, 'getRol') ? $u->getRol() : "—";
 
         echo "<tr>";
         echo "<td>".$u->getNombre() ."</td>";
         echo "<td>".$u->getCorreo() ."</td>";
-        echo "<td>".$u->getRol()."</td>";
+        echo "<td>".$rol."</td>";
         echo "<td>".$matricula."</td>";
         echo "<tr>";
     }
