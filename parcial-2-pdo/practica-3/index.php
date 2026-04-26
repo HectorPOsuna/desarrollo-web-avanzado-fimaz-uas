@@ -23,4 +23,10 @@ try {
     die("Error de conexión: " . $e->getMessage());
 }
 
+/********************************
+ * MENSAJES PARA MOSTRAR EN PANTALLA
+ ********************************/
+$mensaje = "";
+$detalle = "";
+
 ?>
