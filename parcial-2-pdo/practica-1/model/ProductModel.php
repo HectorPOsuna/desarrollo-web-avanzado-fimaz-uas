@@ -13,5 +13,9 @@
             $this->existencia = $existencia;
             $this->precio = $precio;
         }
+
+        public function __destruct() {
+            
+        }
     }
 ?>
