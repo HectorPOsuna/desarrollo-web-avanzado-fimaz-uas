@@ -94,5 +94,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-
+/********************************
+ * CONSULTAS PARA MOSTRAR TABLAS
+ ********************************/
+$alumnos = $pdo->query("SELECT * FROM alumnos ORDER BY idAlumno DESC")->fetchAll();
+$logs    = $pdo->query("SELECT * FROM logs_alumnos ORDER BY idLog DESC")->fetchAll();
 ?>
