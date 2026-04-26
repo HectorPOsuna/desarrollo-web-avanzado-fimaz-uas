@@ -15,4 +15,9 @@
             $mensaje = "Error al eliminar el producto.";
         }
     }
+
+    if (isset($_GET['editar'])) {
+        $idEditar = $_GET['editar'];
+        $productoEditar = $controller->obtenerPorId($idEditar);
+    }
 ?>
