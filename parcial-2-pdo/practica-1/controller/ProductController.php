@@ -22,5 +22,12 @@
 
             return $stmt->execute();
         }
+
+        public function listar(){
+            $sql = "SELECT * FROM productos ORDER BY id DESC";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
     }
 ?>
