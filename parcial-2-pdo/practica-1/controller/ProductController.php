@@ -29,5 +29,13 @@
             $stmt->execute();
             return $stmt->fetchAll();
         }
+
+        public function obtenerPorId($id){
+            $sql = "SELECT * FROM productos WHERE id = :id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch();
+        }
     }
 ?>
