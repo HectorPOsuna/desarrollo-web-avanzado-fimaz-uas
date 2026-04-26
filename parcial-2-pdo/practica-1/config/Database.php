@@ -13,7 +13,9 @@
                 
                 $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FECTCH_ASSOC);
-            }catch
+            }catch (PDOException $e){
+                die("Error de conexion: " . $e->getMessage());
+            }
         }
     }
 ?>
