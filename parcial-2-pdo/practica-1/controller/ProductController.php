@@ -52,5 +52,12 @@
 
             return $stmt->execute();
         }
+
+        public function eliminar($id){
+            $sql = "DELETE FROM productos WHERE id = :id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            return $stmt->execute();
+        }
     }
 ?>
