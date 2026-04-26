@@ -14,5 +14,5 @@
         } else {
             $mensaje = "Error al eliminar el producto.";
         }
-}
+    }
 ?>
