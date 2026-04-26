@@ -1,0 +1,7 @@
+<?php
+    require_once 'controller/ProductController.php';
+    $controller = new ProductController();
+
+    $mensaje = "";
+    $productoEditar = null;
+?>
