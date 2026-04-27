@@ -8,6 +8,10 @@ class Database {
     private $password = "";
     private $connection;
 
+    /**
+     * The function is a PHP constructor that establishes a connection to a MySQL database using PDO
+     * and sets error handling and fetch mode attributes.
+     */
     public function __construct() {
         try {
             $dsn = "mysql:host={$this->host};dbname={$this->dbname};charset=utf8mb4";
@@ -20,6 +24,12 @@ class Database {
         }
     }
 
+    /**
+     * The getConnection function returns the connection object.
+     * 
+     * @return The `getConnection` function is returning the `connection` property of the current
+     * object.
+     */
     public function getConnection() {
         return $this->connection;
     }
