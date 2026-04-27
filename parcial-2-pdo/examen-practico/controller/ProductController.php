@@ -30,5 +30,17 @@ class ProductController {
             die("Error al crear el producto: " . $e->getMessage());
         }
     }
+
+    public function listar() {
+        try {
+            $sql = "SELECT * FROM productos ORDER BY id DESC";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+
+        } catch (PDOException $e) {
+            die("Error al listar los productos: " . $e->getMessage());
+        }
+    }
 }
 ?>
