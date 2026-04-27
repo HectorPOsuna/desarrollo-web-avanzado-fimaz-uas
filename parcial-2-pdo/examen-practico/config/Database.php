@@ -1,6 +1,12 @@
 <?php
 namespace App\Config;
 
+/**
+ * The `Database` class is responsible for establishing a connection to a MySQL database using PDO (PHP
+ * 
+ * @author Hector Manuel Padilla Osuna
+ * @version 1.0.0
+ */
 class Database {
     private $host = "localhost";
     private $dbname = "dwebavanzado";
@@ -8,10 +14,6 @@ class Database {
     private $password = "";
     private $connection;
 
-    /**
-     * The function is a PHP constructor that establishes a connection to a MySQL database using PDO
-     * and sets error handling and fetch mode attributes.
-     */
     public function __construct() {
         try {
             $dsn = "mysql:host={$this->host};dbname={$this->dbname};charset=utf8mb4";
