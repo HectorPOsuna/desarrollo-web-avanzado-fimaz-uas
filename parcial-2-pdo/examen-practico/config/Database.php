@@ -1,5 +1,5 @@
 <?php
-namespace examen\Config;
+namespace App\Config;
 
 class Database {
     private $host = "localhost";

@@ -1,5 +1,5 @@
 <?php
-namespace examen\model;
+namespace App\model;
 
 class ProductModel {
     private $id;
