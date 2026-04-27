@@ -42,5 +42,18 @@ class ProductController {
             die("Error al listar los productos: " . $e->getMessage());
         }
     }
+
+    public function obtenerPorId($id) {
+        try {
+            $sql = "SELECT * FROM productos WHERE id = :id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch();
+
+        } catch (PDOException $e) {
+            die("Error al obtener el producto: " . $e->getMessage());
+        }
+    }
 }
 ?>
