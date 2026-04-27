@@ -44,7 +44,7 @@ class ProductController {
 
             return $stmt->execute();
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             die("Error al crear el producto: " . $e->getMessage());
         }
     }
@@ -63,7 +63,7 @@ class ProductController {
             $stmt->execute();
             return $stmt->fetchAll();
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             die("Error al listar los productos: " . $e->getMessage());
         }
     }
@@ -87,7 +87,7 @@ class ProductController {
             $stmt->execute();
             return $stmt->fetch();
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             die("Error al obtener el producto: " . $e->getMessage());
         }
     }
