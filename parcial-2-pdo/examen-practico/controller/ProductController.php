@@ -77,5 +77,17 @@ class ProductController {
             die("Error al actualizar el producto: " . $e->getMessage());
         }
     }
+
+    public function eliminar($id) {
+        try {
+            $sql = "DELETE FROM productos WHERE id = :id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+            return $stmt->execute();
+
+        } catch (\PDOException $e) {
+            die("Error al eliminar el producto: " . $e->getMessage());
+        }
+    }
 }
 ?>
