@@ -19,4 +19,8 @@ class Database {
             die("Error de conexion: " . $e->getMessage());
         }
     }
+
+    public function getConnection() {
+        return $this->connection;
+    }
 }
