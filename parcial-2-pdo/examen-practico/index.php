@@ -59,4 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+if ($terminoBusqueda !== '') {
+    $productos = $controller->buscar($terminoBusqueda);
+} else {
+    $productos = $controller->listar();
+}
 ?>
