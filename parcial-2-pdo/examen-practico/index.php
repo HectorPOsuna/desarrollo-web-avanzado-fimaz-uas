@@ -6,8 +6,8 @@ spl_autoload_register(function ($clase) {
     }
 });
 
-use App\Controller\ProductController;
-use App\Model\ProductModel;
+use Controller\ProductController;
+use Model\ProductModel;
 
 $controller = new ProductController();
 
