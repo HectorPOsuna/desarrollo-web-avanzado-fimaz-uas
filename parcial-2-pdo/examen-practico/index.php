@@ -11,4 +11,7 @@ use Model\ProductModel;
 
 $controller = new ProductController();
 
+$mensaje = "";
+$productoEditar = null;
+
 ?>
