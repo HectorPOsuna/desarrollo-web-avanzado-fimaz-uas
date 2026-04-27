@@ -1,8 +1,8 @@
 <?php
-namespace App\Controller;
+namespace Controller;
 
-use App\Model\ProductModel;
-use App\Config\Database;
+use Model\ProductModel;
+use Config\Database;
 
 /**
  * The `ProductController` class is responsible for handling CRUD operations (Create, Read, Update, Delete)
@@ -22,15 +22,15 @@ class ProductController {
      * The function creates a new record in the database table for a product with the provided
      * information.
      * 
-     * @param Producto producto The `crear` function you provided is a method that inserts a new
-     * product into a database table named `productos`. It takes a `Producto` object as a parameter and
+     * @param ProductModel producto The `crear` function you provided is a method that inserts a new
+     * product into a database table named `productos`. It takes a `ProductModel` object as a parameter and
      * uses its properties (nombre, descripcion, existencia, precio) to populate the database fields.
      * 
      * @return The `execute()` method is being called on the prepared statement ``, and it returns
      * a boolean value indicating whether the execution of the SQL query was successful or not. This
      * method returns `true` on success and `false` on failure.
      */
-    public function crear(Producto $producto) {
+    public function crear(ProductModel $producto) {
         try {
             $sql = "INSERT INTO productos (nombre, descripcion, existencia, precio)
                     VALUES (:nombre, :descripcion, :existencia, :precio)";
@@ -96,8 +96,8 @@ class ProductController {
      * The function `actualizar` updates a product's information in a database using prepared
      * statements in PHP.
      * 
-     * @param Producto producto The `actualizar` function is a method that updates a product in a
-     * database table named `productos`. It takes a `Producto` object as a parameter, which contains
+     * @param ProductModel producto The `actualizar` function is a method that updates a product in a
+     * database table named `productos`. It takes a `ProductModel` object as a parameter, which contains
      * the information needed to update the product's details.
      * 
      * @return The `execute()` method is being called on the prepared statement ``, which will
@@ -105,7 +105,7 @@ class ProductController {
      * boolean value indicating whether the query was successfully executed or not. This boolean value
      * is being returned by the `actualizar` function.
      */
-    public function actualizar(Producto $producto) {
+    public function actualizar(ProductModel $producto) {
         try {
             $sql = "UPDATE productos
                     SET nombre = :nombre, descripcion = :descripcion,

@@ -1,5 +1,5 @@
 <?php
-namespace App\model;
+namespace model;
 
 /**
  * The `ProductModel` class represents a product with properties such as id, name, description, stock, and price. It

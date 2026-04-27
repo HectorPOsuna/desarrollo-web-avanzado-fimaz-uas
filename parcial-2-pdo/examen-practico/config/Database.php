@@ -1,5 +1,5 @@
 <?php
-namespace App\Config;
+namespace Config;
 
 /**
  * The `Database` class is responsible for establishing a connection to a MySQL database using PDO (PHP
