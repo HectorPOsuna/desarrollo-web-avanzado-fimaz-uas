@@ -89,5 +89,22 @@ class ProductController {
             die("Error al eliminar el producto: " . $e->getMessage());
         }
     }
+
+    public function buscar($termino) {
+        try {
+            $sql = "SELECT * FROM productos
+                    WHERE nombre LIKE :termino
+                        OR descripcion LIKE :termino
+                    ORDER BY id DESC";
+
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindValue(':termino', '%' . $termino . '%');
+            $stmt->execute();
+            return $stmt->fetchAll();
+
+        } catch (\PDOException $e) {
+            die("Error al buscar productos: " . $e->getMessage());
+        }
+    }
 }
 ?>
