@@ -25,4 +25,9 @@ if (isset($_GET['eliminar'])) {
     }
 }
 
+if (isset($_GET['editar'])) {
+    $idEditar = $_GET['editar'];
+    $productoEditar = $controller->obtenerPorId($idEditar);
+}
+
 ?>
