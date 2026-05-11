@@ -13,6 +13,8 @@ class TorneosModel
     public function insert($nombreTorneo, $organizador, $patrocinadores, $sede, $categoria, 
     $premio1, $premio2, $premio3, $usuario, $contraseña)
     {
+        $contraseña = $this->passwordEncrypt($contraseña);
+        
         $statement = $this->PDO->prepare("INSERT INTO torneos VALUES (NULL, :nombre, :organizador, 
         :patrocinadores, :sede, :categoria, :premio1, :premio2, :premio3, :usuario, :password)");
 
@@ -28,6 +30,17 @@ class TorneosModel
         $statement->bindParam(":password", $hash);
 
         return ($statement->execute()) ? $this->PDO->lastInsertId() : false;
+    }
+
+    public function passwordEncrypt($contraseña)
+    {
+        $passwordEncrypt = password_hash($contraseña, PASSWORD_DEFAULT);
+        return $passwordEncrypt;
+    }
+
+    public function passwordDencrypt($passwordEncrypt, $passwordCandidate)
+    {
+        (password_verify($passwordCandidate, $passwordEncrypt)) ? true : false;
     }
 }
 ?>
