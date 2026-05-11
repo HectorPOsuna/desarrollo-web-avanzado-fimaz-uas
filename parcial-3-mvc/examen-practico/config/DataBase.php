@@ -2,7 +2,7 @@
 class DataBase
 {
     private $host = "localhost";
-    private $dbname = "torneos";
+    private $dbname = "dwebavanzado";
     private $user = "root";
     private $password = "";
 
