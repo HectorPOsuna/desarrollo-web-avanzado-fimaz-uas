@@ -1,16 +1,31 @@
 <?php
-    namespace Controllers;
+namespace Controllers;
 
-    use Models\ProductoModel;
+use Models\ProductoModel;
 
-    class PublicController
+/**
+ * Clase que gestiona las vistas publicas del catalogo.
+ *
+ * @package Controllers
+ * @author Hector Manuel Padilla Osuna
+ * @version 1.0.0
+ */
+class PublicController
+{
+    /**
+     * Muestra el catalogo publico con busqueda y paginacion.
+     */
+    public function catalogo(): void
     {
-        public function catalogo(): void
-        {
-            $termino = trim($_GET['buscar'] ?? '');
-            $productoModel = new ProductoModel();
-            $productos = $productoModel->buscarProducto($termino);
-            require_once __DIR__ . '/../views/public/catalogo.php';
-        }
+        $termino = trim($_GET['buscar'] ?? '');
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $perPage = 9;
+
+        $productoModel = new ProductoModel();
+        $productos = $productoModel->buscarProducto($termino, $page, $perPage);
+        $total = $productoModel->contarBusqueda($termino);
+        $totalPages = max(1, (int)ceil($total / $perPage));
+
+        require_once __DIR__ . '/../views/public/catalogo.php';
     }
-?>
+}
