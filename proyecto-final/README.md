@@ -51,7 +51,21 @@ necesidad de autenticarse.
    - `/api/productos/{id}` — detalle de un producto en JSON.
 
 ## Evidencias de funcionamiento
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
+
+A continuación se muestran las pantallas principales del sistema en ejecución:
+
+### Catálogo público
+Permite a cualquier visitante consultar y buscar productos sin autenticarse.
+![Catálogo público de productos](views/img/image.png)
+
+### Inicio de sesión
+Acceso al panel de administración con token CSRF.
+![Formulario de inicio de sesión](views/img/image-1.png)
+
+### Panel de administración
+CRUD completo de productos (crear, listar, editar y eliminar).
+![Panel de administración de productos](views/img/image-2.png)
+
+### Bitácora de actividades
+Registro de las acciones realizadas por los administradores.
+![Bitácora de actividades](views/img/image-3.png)
