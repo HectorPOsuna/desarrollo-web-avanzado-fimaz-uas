@@ -5,28 +5,45 @@ use Config\Database;
 use PDO;
 use PDOException;
 
+/**
+ * Clase que gestiona los usuarios administradores.
+ *
+ * @package Models
+ * @author Hector Manuel Padilla Osuna
+ * @version 1.0.0
+ */
 class UsuarioModel
 {
+    /**
+     * Conexion a la base de datos.
+     *
+     * @var PDO
+     */
     private PDO $conexion;
 
     public function __construct()
     {
         $db = new Database();
-        $this -> conexion = $db->connect();
+        $this->conexion = $db->connect();
     }
 
+    /**
+     * Busca un usuario por su nombre de usuario.
+     *
+     * @param  string     $username Nombre de usuario a buscar
+     * @return array|null           Datos del usuario si existe, null en caso contrario
+     */
     public function buscarPorUsername(string $username): ?array
     {
-        try{
+        try {
             $sql = 'SELECT * FROM usuarios WHERE username = :username LIMIT 1';
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(':username', $username);
-            $stmt -> execute();
+            $stmt->execute();
             $usuario = $stmt->fetch();
             return $usuario ?: null;
-        } catch(PDOException $e){
+        } catch (PDOException $e) {
             return null;
         }
     }
 }
-?>
