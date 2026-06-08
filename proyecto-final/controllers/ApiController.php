@@ -38,4 +38,29 @@ class ApiController
         exit;
     }
 
+    /**
+     * Retorna el listado completo de productos en formato JSON.
+     */
+    public function productos(): void
+    {
+        $productos = $this->productoModel->obtenerTodos();
+        $this->jsonResponse(['success' => true, 'data' => $productos]);
+    }
+
+    /**
+     * Retorna un producto especifico en formato JSON.
+     *
+     * @param int $id ID del producto a consultar
+     */
+    public function productoPorId(int $id): void
+    {
+        $producto = $this->productoModel->obtenerPorId($id);
+        if (!$producto) {
+            $this->jsonResponse([
+                'success' => false,
+                'error' => 'Producto no encontrado'
+            ], 404);
+        }
+        $this->jsonResponse(['success' => true, 'data' => $producto]);
+    }
 }
