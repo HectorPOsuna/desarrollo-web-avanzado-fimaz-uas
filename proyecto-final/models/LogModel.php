@@ -52,5 +52,41 @@ class LogModel
         }
     }
 
-    
+    /**
+     * Obtiene los registros de la bitacora paginados.
+     *
+     * @param  int   $page    Numero de pagina actual
+     * @param  int   $perPage Cantidad de registros por pagina
+     * @return array          Lista de registros de la bitacora
+     */
+    public function obtenerTodos(int $page = 1, int $perPage = 20): array
+    {
+        try {
+            $offset = ($page - 1) * $perPage;
+            $sql = 'SELECT * FROM bitacora ORDER BY created_at DESC LIMIT :limit OFFSET :offset';
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':limit', $perPage, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+
+    /**
+     * Cuenta el total de registros en la bitacora.
+     *
+     * @return int Total de registros almacenados
+     */
+    public function contarTodos(): int
+    {
+        try {
+            $sql = 'SELECT COUNT(*) as total FROM bitacora';
+            $stmt = $this->conexion->query($sql);
+            return (int)$stmt->fetch()['total'];
+        } catch (PDOException $e) {
+            return 0;
+        }
+    }
 }
