@@ -24,4 +24,18 @@ class ApiController
         $this->productoModel = new ProductoModel();
     }
 
+    /**
+     * Envia una respuesta JSON al cliente.
+     *
+     * @param mixed $data   Datos a serializar como JSON
+     * @param int   $status Codigo de estado HTTP de la respuesta
+     */
+    private function jsonResponse(mixed $data, int $status = 200): void
+    {
+        header('Content-Type: application/json; charset=utf-8');
+        http_response_code($status);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
 }
