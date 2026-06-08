@@ -17,5 +17,16 @@ class Csrf
     {
         return '<input type="hidden" name="csrf_token" value="' . self::generar() . '">';
     }
+
+    public static function validar(?string $token): bool
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (empty($_SESSION['csrf_token']) || empty($token)) {
+            return false;
+        }
+        return hash_equals($_SESSION['csrf_token'], $token);
+    }
 }
 ?>
