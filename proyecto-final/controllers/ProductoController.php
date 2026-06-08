@@ -206,3 +206,19 @@ class ProductoController
 
         imagedestroy($imagen);
     }
+
+    /**
+     * Muestra el listado paginado de productos.
+     */
+    public function index(): void
+    {
+        $this->verificarSesion();
+
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $perPage = 10;
+        $productos = $this->productoModel->obtenerTodos($page, $perPage);
+        $total = $this->productoModel->contarTodos();
+        $totalPages = max(1, (int)ceil($total / $perPage));
+
+        require_once __DIR__ . '/../views/productos/index.php';
+    }
