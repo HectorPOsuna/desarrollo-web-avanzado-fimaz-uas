@@ -318,3 +318,131 @@ class ProductoController
         header('Location: productos');
         exit;
     }
+
+    /**
+     * Muestra el formulario de edicion de producto.
+     *
+     * @param int $id ID del producto a editar
+     */
+    public function edit(): void
+    {
+        $this->verificarSesion();
+
+        $id = (int)($_GET['id'] ?? 0);
+        $producto = $this->productoModel->obtenerPorId($id);
+
+        if (!$producto) {
+            $_SESSION['error'] = 'Producto no encontrado.';
+            header('Location: productos');
+            exit;
+        }
+
+        require_once __DIR__ . '/../views/productos/edit.php';
+    }
+
+    /**
+     * Procesa el formulario de actualizacion de producto.
+     *
+     * Valida campos obligatorios, tipos numericos, valores negativos,
+     * relacion precio venta >= precio compra, SKU unico (excluyendo el actual),
+     * CSRF e imagen.
+     */
+    public function update(): void
+    {
+        $this->verificarSesion();
+        $this->redirigirSiNoCsrf();
+
+        $id = (int)($_POST['id'] ?? 0);
+
+        $data = [
+            'sku' => trim($_POST['sku'] ?? ''),
+            'nombre' => trim($_POST['nombre'] ?? ''),
+            'descripcion' => trim($_POST['descripcion'] ?? ''),
+            'precio_compra' => trim($_POST['precio_compra'] ?? ''),
+            'precio_venta' => trim($_POST['precio_venta'] ?? ''),
+            'existencia' => trim($_POST['existencia'] ?? ''),
+            'imagen' => ''
+        ];
+
+        if ($id <= 0) {
+            $_SESSION['error'] = 'ID invalido.';
+            header('Location: productos');
+            exit;
+        }
+
+        $productoActual = $this->productoModel->obtenerPorId($id);
+        if (!$productoActual) {
+            $_SESSION['error'] = 'Producto no encontrado.';
+            header('Location: productos');
+            exit;
+        }
+
+        if (
+            $data['sku'] === '' ||
+            $data['nombre'] === '' ||
+            $data['descripcion'] === '' ||
+            $data['precio_compra'] === '' ||
+            $data['precio_venta'] === '' ||
+            $data['existencia'] === ''
+        ) {
+            $_SESSION['error'] = 'Todos los campos son obligatorios.';
+            header("Location: productos/edit?id=$id");
+            exit;
+        }
+
+        if (!is_numeric($data['precio_compra']) || !is_numeric($data['precio_venta'])
+            || !is_numeric($data['existencia'])) {
+            $_SESSION['error'] = 'Precio de compra, precio de venta y existencia deben ser numericos.';
+            header("Location: productos/edit?id=$id");
+            exit;
+        }
+
+        $precioCompra = (float)$data['precio_compra'];
+        $precioVenta = (float)$data['precio_venta'];
+        $existencia = (int)$data['existencia'];
+
+        if ($precioCompra < 0 || $precioVenta < 0) {
+            $_SESSION['error'] = 'No se permiten valores negativos en los precios.';
+            header("Location: productos/edit?id=$id");
+            exit;
+        }
+
+        if ($existencia < 0) {
+            $_SESSION['error'] = 'La existencia debe ser mayor o igual que 0.';
+            header("Location: productos/edit?id=$id");
+            exit;
+        }
+
+        if ($precioVenta < $precioCompra) {
+            $_SESSION['error'] = 'El precio de venta debe ser mayor o igual que el precio de compra.';
+            header("Location: productos/edit?id=$id");
+            exit;
+        }
+
+        if ($this->productoModel->existeSku($data['sku'], $id)) {
+            $_SESSION['error'] = 'El SKU ingresado ya existe. Debe usar un SKU unico.';
+            header("Location: productos/edit?id=$id");
+            exit;
+        }
+
+        $data['imagen'] = $this->procesarImagen(
+            $_FILES['imagen'] ?? null,
+            $productoActual['imagen'] ?? ''
+        );
+
+        if (!empty($_SESSION['error'])) {
+            header("Location: productos/edit?id=$id");
+            exit;
+        }
+
+        if ($this->productoModel->actualizar($id, $data)) {
+            $_SESSION['success'] = 'Producto actualizado correctamente.';
+            $this->registrarLog('Actualizar producto', "ID: $id, SKU: {$data['sku']}, Nombre: {$data['nombre']}");
+        } else {
+            $_SESSION['error'] = 'No fue posible actualizar el producto.';
+        }
+
+        header('Location: productos');
+        exit;
+    }
+
