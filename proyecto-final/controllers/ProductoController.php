@@ -122,3 +122,87 @@ class ProductoController
         $_SESSION['error'] = 'Error al subir la imagen.';
         return $imagenActual ?? '';
     }
+
+    /**
+     * Redimensiona la imagen a maximo 800px y la convierte en cuadrada.
+     *
+     * Si la imagen excede los 800px, la escala proporcionalmente.
+     * Luego, si el resultado no es cuadrado, lo centra en un lienzo
+     * cuadrado con fondo blanco (JPEG) o transparente (PNG/GIF/WEBP).
+     * Esto evita que el CSS object-fit: cover recorte el producto
+     * y solo recorte las barras de relleno.
+     *
+     * @param string $ruta      Ruta completa al archivo
+     * @param string $extension Extension del archivo (jpg, jpeg, png, gif, webp)
+     */
+    private function redimensionarImagen(string $ruta, string $extension): void
+    {
+        if (!extension_loaded('gd')) {
+            return;
+        }
+
+        $info = getimagesize($ruta);
+        if (!$info) {
+            return;
+        }
+
+        $w = $info[0];
+        $h = $info[1];
+        $max = 800;
+
+        $escala = ($w > $max || $h > $max);
+        $nw = $escala ? (int)($w * ($max / max($w, $h))) : $w;
+        $nh = $escala ? (int)($h * ($max / max($w, $h))) : $h;
+
+        $imagen = imagecreatetruecolor($nw, $nh);
+
+        $conTransparencia = in_array($extension, ['png', 'gif', 'webp']);
+        if ($conTransparencia) {
+            imagealphablending($imagen, false);
+            imagesavealpha($imagen, true);
+        }
+
+        $origen = match ($extension) {
+            'png'  => imagecreatefrompng($ruta),
+            'gif'  => imagecreatefromgif($ruta),
+            'webp' => imagecreatefromwebp($ruta),
+            default => imagecreatefromjpeg($ruta),
+        };
+
+        if (!$origen) {
+            imagedestroy($imagen);
+            return;
+        }
+
+        imagecopyresampled($imagen, $origen, 0, 0, 0, 0, $nw, $nh, $w, $h);
+        imagedestroy($origen);
+
+        if ($nw !== $nh) {
+            $lado = max($nw, $nh);
+            $cuadrado = imagecreatetruecolor($lado, $lado);
+
+            if ($conTransparencia) {
+                imagealphablending($cuadrado, false);
+                imagesavealpha($cuadrado, true);
+                $relleno = imagecolorallocatealpha($cuadrado, 0, 0, 0, 127);
+            } else {
+                $relleno = imagecolorallocate($cuadrado, 255, 255, 255);
+            }
+            imagefill($cuadrado, 0, 0, $relleno);
+
+            $x = (int)(($lado - $nw) / 2);
+            $y = (int)(($lado - $nh) / 2);
+            imagecopy($cuadrado, $imagen, $x, $y, 0, 0, $nw, $nh);
+            imagedestroy($imagen);
+            $imagen = $cuadrado;
+        }
+
+        match ($extension) {
+            'png'  => imagepng($imagen, $ruta, 8),
+            'gif'  => imagegif($imagen, $ruta),
+            'webp' => imagewebp($imagen, $ruta, 85),
+            default => imagejpeg($imagen, $ruta, 85),
+        };
+
+        imagedestroy($imagen);
+    }
