@@ -72,3 +72,53 @@ class ProductoController
         );
     }
 
+    /**
+     * Procesa la subida de una imagen de producto.
+     *
+     * Valida el formato y tamano del archivo. Elimina la imagen anterior
+     * si existe y se esta reemplazando.
+     *
+     * @param  array|null  $file         Archivo subido desde $_FILES['imagen']
+     * @param  string|null $imagenActual Nombre de la imagen actual del producto
+     * @return string                    Nombre del archivo guardado o cadena vacia
+     */
+    private function procesarImagen(?array $file, ?string $imagenActual = null): string
+    {
+        if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
+            return $imagenActual ?? '';
+        }
+
+        $dirUploads = __DIR__ . '/../views/img/productos/';
+        if (!is_dir($dirUploads)) {
+            mkdir($dirUploads, 0775, true);
+        }
+
+        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $permitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+        if (!in_array($extension, $permitidas)) {
+            $_SESSION['error'] = 'Tipo de imagen no permitido. Use: jpg, jpeg, png, gif, webp.';
+            return $imagenActual ?? '';
+        }
+
+        $maxSize = 2 * 1024 * 1024;
+        if ($file['size'] > $maxSize) {
+            $_SESSION['error'] = 'La imagen no debe superar los 2MB.';
+            return $imagenActual ?? '';
+        }
+
+        if ($imagenActual && file_exists($dirUploads . $imagenActual)) {
+            unlink($dirUploads . $imagenActual);
+        }
+
+        $nombreArchivo = uniqid('img_') . '.' . $extension;
+        $rutaCompleta = $dirUploads . $nombreArchivo;
+
+        if (move_uploaded_file($file['tmp_name'], $rutaCompleta)) {
+            $this->redimensionarImagen($rutaCompleta, $extension);
+            return $nombreArchivo;
+        }
+
+        $_SESSION['error'] = 'Error al subir la imagen.';
+        return $imagenActual ?? '';
+    }
