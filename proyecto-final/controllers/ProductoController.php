@@ -446,3 +446,58 @@ class ProductoController
         exit;
     }
 
+    /**
+     * Elimina un producto y su imagen asociada.
+     */
+    public function delete(): void
+    {
+        $this->verificarSesion();
+        $this->redirigirSiNoCsrf();
+
+        $id = (int)($_POST['id'] ?? 0);
+
+        if ($id <= 0) {
+            $_SESSION['error'] = 'ID invalido.';
+            header('Location: productos');
+            exit;
+        }
+
+        $producto = $this->productoModel->obtenerPorId($id);
+        if (!$producto) {
+            $_SESSION['error'] = 'Producto no encontrado.';
+            header('Location: productos');
+            exit;
+        }
+
+        if ($producto['imagen'] && file_exists(__DIR__ . '/../views/img/productos/' . $producto['imagen'])) {
+            unlink(__DIR__ . '/../views/img/productos/' . $producto['imagen']);
+        }
+
+        if ($this->productoModel->eliminar($id)) {
+            $_SESSION['success'] = 'Producto eliminado correctamente.';
+            $this->registrarLog('Eliminar producto', "ID: $id, SKU: {$producto['sku']}, Nombre: {$producto['nombre']}");
+        } else {
+            $_SESSION['error'] = 'No fue posible eliminar el producto.';
+        }
+
+        header('Location: productos');
+        exit;
+    }
+
+    /**
+     * Muestra la bitacora de actividades del administrador.
+     */
+    public function bitacora(): void
+    {
+        $this->verificarSesion();
+
+        $logModel = new LogModel();
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $perPage = 20;
+        $logs = $logModel->obtenerTodos($page, $perPage);
+        $total = $logModel->contarTodos();
+        $totalPages = max(1, (int)ceil($total / $perPage));
+
+        require_once __DIR__ . '/../views/productos/bitacora.php';
+    }
+}
