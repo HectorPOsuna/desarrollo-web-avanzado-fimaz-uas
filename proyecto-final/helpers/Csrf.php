@@ -12,5 +12,10 @@ class Csrf
         }
         return $_SESSION['csrf_token'];
     }
+
+    public static function campo(): string
+    {
+        return '<input type="hidden" name="csrf_token" value="' . self::generar() . '">';
+    }
 }
 ?>
