@@ -12,5 +12,16 @@ use Models\ProductoModel;
  */
 class ApiController
 {
-    
+    /**
+     * Instancia del modelo de productos.
+     *
+     * @var ProductoModel
+     */
+    private ProductoModel $productoModel;
+
+    public function __construct()
+    {
+        $this->productoModel = new ProductoModel();
+    }
+
 }
